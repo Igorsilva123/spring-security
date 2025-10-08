@@ -10,6 +10,8 @@ public record RegisterRequest(
                     @NotBlank
                     String password,
                     @NotBlank
-                    String cpf)
+                    String cpf,
+                    Boolean active
+)
 {
 }

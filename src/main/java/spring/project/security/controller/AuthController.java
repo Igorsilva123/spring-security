@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 import spring.project.security.entity.authentication.DataToken;
 import spring.project.security.entity.user.LoginRequest;
 import spring.project.security.entity.user.RegisterRequest;
@@ -41,8 +42,10 @@ public class AuthController {
     }
     
     @PostMapping("register")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest dto){
-        userService.registerUser(dto);
+    public ResponseEntity registerUser(@Valid @RequestBody RegisterRequest dto, UriComponentsBuilder uriBuilder){
+        User user = userService.registerUser(dto);
+        var uri = uriBuilder.path("/user/{id}").buildAndExpand(user.id)
+
         return ResponseEntity.ok("successfully registered user");
     }
 

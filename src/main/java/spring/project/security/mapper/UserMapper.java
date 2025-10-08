@@ -15,9 +15,10 @@ public class UserMapper {
         User newUser = new User();
         newUser.setEmail(body.email());
         newUser.setUsername(body.username());
+
         newUser.setPassword(passwordEncoder.encode(body.password()));
         newUser.setCpf(body.cpf());
-
+        newUser.setActive(Boolean.TRUE);
 
         return newUser;
     }
